@@ -18,14 +18,17 @@ AFRAME.registerComponent("bullets",{
                     y:pos.y,
                     z:pos.z
                 })
-                bullet.setAttribute("velocity",{
-                    x:0,
-                    y:0,
-                    z:-1
-                })
+
+                var camera=document.querySelector("#camera").object3D
+                var direction=new THREE.Vector3()
+                camera.getWorldDirection(direction)
+
+                bullet.setAttribute("velocity",
+                  direction.multiplyScalar(-10)
+                )
 
                 var scene = document.querySelector("#scene")
-                scene.appendChild("bullet")
+                scene.appendChild(bullet)
             }
         })
     }
